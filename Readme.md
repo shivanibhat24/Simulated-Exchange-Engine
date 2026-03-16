@@ -47,26 +47,6 @@ The matching engine never touches the network. The gateway never touches the LOB
 
 ---
 
-## File structure
-
-```
-exchange/
-├── include/
-│   ├── types.hpp             # Shared types: Order, ExecutionReport, DepthUpdate, OrderRequest
-│   ├── spsc_queue.hpp        # Lock-free SPSC ring buffer (alignas(64) false-sharing fix)
-│   ├── slab_pool.hpp         # Pre-allocated object pool, O(1) alloc/free, no malloc
-│   ├── matching_engine.hpp   # Price-time priority LOB + engine run loop
-│   ├── fix_parser.hpp        # Zero-copy FIX 4.2 parser + FixBuilder (string_view, no alloc)
-│   ├── fix_gateway.hpp       # Boost.Asio async TCP gateway + pre-trade risk checks
-│   └── multicast_feed.hpp    # UDP multicast publisher + TCP NACK repair channel
-├── src/
-│   ├── main.cpp              # Wires subsystems, pins threads to cores
-│   └── bench_lob.cpp         # RDTSC latency benchmark (p50/p99/p999)
-├── CMakeLists.txt
-└── README.md
-```
-
----
 
 ## Build
 
@@ -255,7 +235,3 @@ High `Hitm` on the SPSC queue's head and tail is the most common source of unexp
 **Connect a strategy** — write a FIX client in C++ that subscribes to the multicast feed and sends orders to port 9001. The `bench_lob.cpp` file shows how to interact with the queues directly if running in-process.
 
 ---
-
-## License
-
-MIT
