@@ -8,7 +8,7 @@ A simulated exchange written in C++17, built for low-latency systems education a
 
 ```
                     ┌─────────────────────────────────────────────────────┐
-  FIX clients       │                    exchange                         │
+  FIX clients       │                    Engine                           │
   (TCP :9001)       │                                                     │
        │            │  ┌──────────────────┐     ┌─────────────────────┐  │
        │  TCP       │  │   FIX gateway    │     │  matching engine    │  │
